@@ -1,11 +1,11 @@
 const express = require('express')
 const app = express()
 const config = require('./config')
-require('./mongoose.config')
+require('./src/config/mongoose.config')
 const morgan = require('morgan')
-const router = require('./src/routers/sesion.router')
 
-const { swaggerDocs } = require('./configSwagger')
+const { swaggerDocs } = require('./src/config/configSwagger')
+
 const buildLogger = require('./logger')
 
 //TODO: verificar mejor si esto esta bien 
@@ -14,13 +14,19 @@ const logger = buildLogger('app.js');
 logger.log('Hola mundo')
 logger.error('Esto es algo malo')
 
+//router
+const routerLogin = require('./src/routers/login.router')
+const routerRegister = require('./src/routers/register.router')
+
+
 app.use(express.json())
-//para ver las peticiones que llega al server
 app.use(morgan('dev'))
-app.use(router)
+
+//usando router
+app.use(routerLogin)
+app.use(routerRegister)
 
 app.listen(config.api.port, () => {
     console.log(`Server en linea en el port: ${config.api.port}`)
-    //para la documentacion de los enpoints
     swaggerDocs(app, config.api.port)
 })

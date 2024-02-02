@@ -14,7 +14,7 @@ const options = {
             version: '1.0.0',
         },
     },
-    apis: ['./src/routers/sesion.router.js', './src/controllers/*.js'],
+    apis: ['./src/routers/*.js', './src/controllers/*.js'],
 };
 
 const specs = swaggerJsdoc(options)

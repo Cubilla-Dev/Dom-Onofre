@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const config = require('./config')
+const config = require('../../config')
 
 mongoose.set("strictQuery", false)
 mongoose.connect(`mongodb://127.0.0.1:/${config.db.host}`, {
