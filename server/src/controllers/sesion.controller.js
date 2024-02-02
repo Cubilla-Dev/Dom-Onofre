@@ -11,12 +11,12 @@ const sesion = {
                 .exec()
 
             if(!findUser){
-                res.status(404).json({ message: "El email porporcionado no es la correcta"})
+                res.status(403).json({ message: "El email porporcionado no fue encontrado"})
             }
 
             const passwordComparison = bcrypt.compareSync(password, findUser.passwordhash)
             if(!passwordComparison){
-                res.status(401).json({ message: "Contrsenha incorrecta"})
+                res.status(401).json({ message: "Contraseña incorrecta"})
             }
 
             const tokenJWT = createTokenJWT("1", {_id: findUser._id})
@@ -28,13 +28,13 @@ const sesion = {
                     userData: findUser,
                 })
         }catch( error ){
-            console.error(error.message)
-            res.status(409).json({ message: "El usuario no puedo iniciar la sesion"})
+            // res.status(409).json({ message: "El usuario no puedo iniciar la sesion"})
+            res.status(500).json({ message: "Error del servidor"})
+
         }
     },
     register: async (req, res) => {
         const {name, first_name, email, password } = req.body;
-        console.log(name)
         try  {
             const valid = await User.find({ email })
             const existingUser = await User.findOne({ $or:[{ email }]})
@@ -50,8 +50,7 @@ const sesion = {
 
             res.status(200).send({ message: 'Usuario creado'})
         }catch( error ){
-            console.log(error.message)
-            res.status(409).send({ message: "El usuario no pudo ser registrado"})
+            res.status(500).json({ message: "Error del servidor"})
         }
     },
     allUser: async (req, res) => {
