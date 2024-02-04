@@ -18,7 +18,7 @@ logger.error('Esto es algo malo')
 const routerLogin = require('./src/routers/login.router')
 const routerRegister = require('./src/routers/register.router')
 
-
+//middleware
 app.use(express.json())
 app.use(morgan('dev'))
 
