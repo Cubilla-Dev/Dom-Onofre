@@ -1,34 +1,40 @@
 const express = require('express')
 const app = express()
 const config = require('./config')
-// require('./src/config/mongoose.config')
+const cors = require("cors")
 const morgan = require('morgan')
 
-const { swaggerDocs } = require('./src/config/configSwagger')
+//routers
+const router = require('./src/routers/pagos.router')
+const routerHook = require('./src/routers/webhook.router')
+const routerShowSale = require('./src/routers/show.sale.router')
+const routerAddProduct = require('./src/routers/add.product.router')
+const routerShowProduct = require('./src/routers/show.product.router')
+const routerAllProduct = require('./src/routers/all.product.router')
 
-const buildLogger = require('./logger')
-
-//TODO: verificar mejor si esto esta bien 
-//para guardar los logs
-const logger = buildLogger('app.js');
-logger.log('Hola mundo')
-logger.error('Esto es algo malo')
-
-//router
-const routerLogin = require('./src/routers/login.router')
-const routerRegister = require('./src/routers/register.router')
-const routerVerificar = require('./src/routers/verificacion.router')
+//DB
+require('./src/config/mongoose.config')
 
 //middleware
 app.use(express.json())
 app.use(morgan('dev'))
+const corsOptions = {
+    origin:  config.api.host_cors, 
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204,
+};
 
+app.use(cors(corsOptions));
 //usando router
-app.use(routerLogin)
-app.use(routerRegister)
-app.use(routerVerificar)
+app.use(router)
+app.use(routerHook)
+app.use(routerShowSale)
+app.use(routerAddProduct)
+app.use(routerShowProduct)
+app.use(routerAllProduct)
+
 
 app.listen(config.api.port, () => {
     console.log(`Server en linea en el port: ${config.api.port}`)
-    swaggerDocs(app, config.api.port)
 })

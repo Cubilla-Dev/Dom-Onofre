@@ -2,10 +2,13 @@ require('dotenv').config()
 
 module.exports = {
     db: {
-        host: process.env.HOST
+        url_db: process.env.URL_DB
     },
     api: {
         port: process.env.PORT,
-        secretJWT: process.env.SECRET_JWT
+        apiKey: process.env.APIKEY,
+        host_api: process.env.HOST_API,
+        path_api: process.env.PATH_API,
+        host_cors: process.env.HOST_CORS
     },
 }

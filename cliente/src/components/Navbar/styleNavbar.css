@@ -1,0 +1,22 @@
+.container-navbar {
+    height: 60px; 
+    display: flex;
+    padding: 10px;
+    background-color: aqua;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.redireccion {
+    display: flex;
+    padding-right: 100px;
+    flex-direction: row;
+}
+.redireccion div {
+    padding: 10px;
+}
+.logo{
+    padding-left: 100px;
+}
+

@@ -1,0 +1,27 @@
+.container-redirec {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.status-container {
+    text-align: center;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+.paid {
+    color: green;
+}
+
+.pending {
+    color: red;
+}
+
