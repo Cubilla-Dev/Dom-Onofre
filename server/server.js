@@ -33,7 +33,9 @@ app.use(routerShowSale)
 app.use(routerAddProduct)
 app.use(routerShowProduct)
 app.use(routerAllProduct)
-
+app.get('/', (req, res) => {
+    res.send('Server en linea')
+})
 
 app.listen(config.api.port, () => {
     console.log(`Server en linea en el port: ${config.api.port}`)
