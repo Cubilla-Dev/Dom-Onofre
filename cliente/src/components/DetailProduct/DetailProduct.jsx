@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { PATH_API_CREATE_DEBT, PATH_API_PRODUCT } from '../../routers/routerApi'
 import './styleDetail.css'
 
 
@@ -14,7 +15,7 @@ const DetailProduct = () => {
     useEffect(() => {
         const fetchProduct = async () => { 
             try {
-                const response = await axios.get(`http://127.0.0.1:3000/product/${id}`);
+                const response = await axios.get(PATH_API_PRODUCT + id);
                 setProduct(response.data); 
             } catch (err) {
                 console.log('Hubo un error en la petición: ', err);
@@ -28,7 +29,7 @@ const DetailProduct = () => {
     //compra del producto
     const payProduct = async () => {
         try {
-            const response = await axios.post(`http://127.0.0.1:3000/create-debt`, 
+            const response = await axios.post(PATH_API_CREATE_DEBT, 
             {
                 idDeuda: uniqueId,
                 valor: product.price,

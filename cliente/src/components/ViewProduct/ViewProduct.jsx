@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { PATH_API_ALL_PRODUCT } from '../../routers/routerApi'
 import './View.css'
 
 const ViewProduct = () => {
@@ -9,7 +10,7 @@ const ViewProduct = () => {
     useEffect(() => {
         const fetchData = async () => { 
             try {
-                const response = await axios.get(`http://127.0.0.1:3000/allproduct`);
+                const response = await axios.get(PATH_API_ALL_PRODUCT);
                 setProduct(response.data);
             } catch (err) {
                 console.log('Hubo un error en la petición: ', err);

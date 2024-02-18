@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import { useLocation} from 'react-router-dom';
 import axios from 'axios'
+import { PATH_API_SHOW_SALE } from '../../routers/routerApi'
 import './stylePago.css'
 
 const RedirecPago = () => {
@@ -12,7 +13,7 @@ const RedirecPago = () => {
         const doc_id = searchParams.get('doc_id');
         const verifiPago = async () => { 
             try {
-                const response = await axios.get(`http://127.0.0.1:3000/showsale/${doc_id}`);
+                const response = await axios.get(PATH_API_SHOW_SALE + doc_id);
                 setSaleData(response.data);
             } catch (err) {
                 console.log('Hubo un error en la petición: ', err);
