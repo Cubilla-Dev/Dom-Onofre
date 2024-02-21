@@ -19,7 +19,7 @@ require('./src/config/mongoose.config')
 app.use(express.json())
 app.use(morgan('dev'))
 const corsOptions = {
-    origin:  config.api.host_cors, 
+    origin:  '*', 
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     optionsSuccessStatus: 204,
